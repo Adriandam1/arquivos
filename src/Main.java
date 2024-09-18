@@ -126,18 +126,69 @@ Debería amosarse o seguinte resultado:
 
  */
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.io.File;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        // Ruta PC clase /home/dam/IdeaProjects/arquivos
+        String baseDir = "/home/dam/IdeaProjects/arquivos";
+        String dirName = baseDir + "/arquivosdir";
+        String subDirName = dirName + "/subdir";
+        String file1 = "Products1.txt";
+        String file2 = "Products2.txt";
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        /*  1) crear o directorio 'arquivosdir' na ruta '/home/postgres/NetBeansProjects/arquivos/'
+         sempre e cando dito directorio non exista previamente.
+         Comprobar que se trata  dun directorio mediante o metodo eDirectorio que creache anteriormente
+        (Comprobar que o directorio foi creado ou existe,  mediante os comandos do sistema operativo (modo texto) , ou mediante o entorno grafico) .
+        */
+        Metodos.crearDirectorio(dirName);
+        Metodos.esDirectorio(dirName);
+
+        /* 2) crear  o arquivo Products1.txt no directorio mencionado anteriormente (arquivosdir) sempre e cando dito arquivo non exista.
+        Comprobar que se trata  dun ficheiro mediante o metodo eFicheiro que creache anteriormente.
+        (Comprobar que o arquivo foi creado ou existe mediante comandos do sistema operativo (modo texto) ou mediante o entorno grafico.)
+         */
+        Metodos.crearArchivo(dirName, file1);
+        Metodos.esArchivo(dirName + "/" + file1);
+
+        /* 3)Crear o directorio 'subdir'  na ruta '/home/postgres/NetBeansProjects/arquivos/arquivosdir/' creada anteriormente
+         Crear o arquivo Products2.txt no directorio mencionado anteriormente (subdir)
+         */
+        Metodos.crearDirectorio(subDirName);
+        Metodos.crearArchivo(subDirName, file2);
+
+        /*  4)Amosar arquivos e subdirectorios de primeiro nivel da ruta
+          '/home/postgres/NetBeansProjects/arquivos/arquivosdir/'
+        */
+        Metodos.mostrarContenido(dirName);
+
+        /* 5)amosar a seguinte informacion sobre o primeiro  arquivo (Products1.txt) creado:
+	    si e posible ou non escribir nel, si e posible ou non ler del
+	    a sua lonxitude en bytes
+	    (a continuacion debes editar manualmente  o arquivo co editor de texto e escribir un texto calquera, por exemplo a palabra  'ola', e volver a amosar a sua lonxitude en bytes (deberia ter cambiado))
+	    */
+        Metodos.modoAcceso(dirName, file1);
+        Metodos.calcularLongitud(dirName, file1);
+
+        // 6) Forzar a que o mesmo arquivo referido no apartado anterior   sexa de so lectura
+        Metodos.mLectura(dirName, file1);
+
+        // 7)forzar a que o arquivo referido no apartado anterior pase de novo a ser de novo de  escritura
+        Metodos.mEscritura(dirName, file1);
+
+        // 8) borrar o arquivo referido no apartado anterior (file1 = "Products1.txt")
+        Metodos.borraFicheiro(dirName, file1);
+
+        // 9)borrar os o resto de arquivos e directorios creados anteriormente
+        Metodos.borraFicheiro(subDirName, file2);
+        Metodos.borrarDirectorio(subDirName);
+        Metodos.borrarDirectorio(dirName);
+
+        /*  10)(opcional) amosa usando o metodo recur(File)
+        todos  os subdirectorios e arquivos que colgan do directorio '/home/postgres/NetBeansProjects/arquivos/arquivosdir/'
+        */
+        Metodos.amosarRecursivo(new File(baseDir + "arquivosdir"));
+
     }
 }
